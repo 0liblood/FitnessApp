@@ -1,0 +1,36 @@
+.statistics-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  
+    .dashboard-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+  
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+  
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+  
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  
+    .distribution-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+  
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+  
