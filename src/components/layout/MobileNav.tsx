@@ -10,6 +10,12 @@ import {
 import './MobileNav.less';
 
 export const MobileNav = () => {
+  /**
+   * Dynamically determines the class names for navigation links.
+   * - Adds an 'active' class to the link if it matches the current route.
+   * @param isActive - Boolean indicating whether the link is active.
+   * @returns A string of class names for the navigation link.
+   */
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `mobile-nav-link ${isActive ? 'active' : ''}`;
 

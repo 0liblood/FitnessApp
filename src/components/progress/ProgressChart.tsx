@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import './ProgressChart.less';
 
 interface DataPoint {
   date: Date;
@@ -13,27 +14,30 @@ interface ProgressChartProps {
 }
 
 export const ProgressChart = ({ data, type }: ProgressChartProps) => {
-  const maxValue = Math.max(...data.map(d => type === 'calories' ? d.calories : d.duration));
-  
+  // Determine the maximum value for scaling the chart bars.
+  const maxValue = Math.max(...data.map((d) => (type === 'calories' ? d.calories : d.duration)));
+
   return (
-    <div className="h-48 flex items-end space-x-2">
+    <div className="progress-chart">
       {data.map((point, index) => {
+        // Get the value to display based on the selected type (calories or duration).
         const value = type === 'calories' ? point.calories : point.duration;
+
+        // Calculate the height of the bar as a percentage of the maximum value.
         const height = maxValue > 0 ? (value / maxValue) * 100 : 0;
-        
+
         return (
           <div
             key={index}
-            className="flex-1 flex flex-col items-center"
-            title={`${format(point.date, 'MMM d')}: ${value} ${type === 'calories' ? 'calories' : 'minutes'}`}
+            className="chart-bar"
+            title={`${format(point.date, 'MMM d')}: ${value} ${
+              type === 'calories' ? 'calories' : 'minutes'
+            }`}
           >
-            <div
-              className="w-full bg-indigo-200 hover:bg-indigo-300 transition-colors rounded-t"
-              style={{ height: `${height}%` }}
-            />
-            <span className="text-xs text-gray-500 mt-1 rotate-45 origin-left">
-              {format(point.date, 'M/d')}
-            </span>
+            {/* Bar representing the data point */}
+            <div className="bar" style={{ height: `${height}%` }} />
+            {/* Label for the bar showing the date */}
+            <span className="bar-label">{format(point.date, 'M/d')}</span>
           </div>
         );
       })}

@@ -1,0 +1,27 @@
+.calories-chart {
+    height: 90%; /* Ensure it fits within the parent container */
+    width: 100%; /* Full width of the container */
+  
+    .recharts-surface {
+      overflow: hidden; /* Prevent overflow issues */
+    }
+  
+    .recharts-tooltip-wrapper {
+      pointer-events: none; /* Avoid accidental tooltips staying open */
+    }
+  
+    .recharts-cartesian-axis-tick {
+      font-size: 0.75rem; /* Match smaller font size for readability */
+      color: #6b7280; /* Neutral gray for ticks */
+    }
+  
+    .recharts-cartesian-grid-line {
+      stroke: #e5e7eb; /* Subtle grid line */
+    }
+  
+    .recharts-default-tooltip {
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+    }
+  }
+  

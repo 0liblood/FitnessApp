@@ -1,6 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format } from 'date-fns';
+import './DurationChart.less';
 
 interface DataPoint {
   date: Date;
@@ -12,19 +13,19 @@ interface DurationChartProps {
 }
 
 export const DurationChart = ({ data }: DurationChartProps) => {
-  const formattedData = data.map(point => ({
+  const formattedData = data.map((point) => ({
     ...point,
     formattedDate: format(new Date(point.date), 'MMM d'),
   }));
 
   return (
-    <div className="h-64 w-full">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="duration-chart">
+      <ResponsiveContainer>
         <AreaChart data={formattedData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="colorDuration" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#34D399" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#34D399" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#34D399" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#34D399" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200" />
