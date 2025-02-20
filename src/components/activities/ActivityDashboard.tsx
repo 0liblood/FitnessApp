@@ -31,7 +31,7 @@ export const ActivityDashboard = () => {
 
       {showForm ? (
         <div className="dashboard-form-container">
-          <ActivityForm />
+          <ActivityForm onComplete={() => setShowForm(false)} />
         </div>
       ) : (
         <ActivityList />

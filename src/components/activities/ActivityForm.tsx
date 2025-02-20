@@ -4,29 +4,48 @@ import { Activity } from '../../types';
 import { Save } from 'lucide-react';
 import './ActivityForm.less';
 
-export const ActivityForm = () => {
+interface ActivityFormProps {
+  onComplete?: () => void;
+}
+
+export const ActivityForm = ({ onComplete }: ActivityFormProps) => {
   const addActivity = useStore((state) => state.addActivity);
   const [formData, setFormData] = useState({
     type: 'walking',
     duration: 30,
-    caloriesBurned: 0,
+    caloriesBurned: 100,
     notes: '',
+    date: new Date().toISOString().slice(0, 16), 
   });
 
+  /**
+   * Handles the form submission process.
+   * - Prevents the default form submission behavior.
+   * - Constructs an Activity object using form data.
+   * - Adds the new activity to the store.
+   * - Resets the form fields to default values.
+   * - Calls the optional onComplete callback if provided.
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const activity: Activity = {
       id: crypto.randomUUID(),
       ...formData,
-      date: new Date(),
+      date: new Date(formData.date), 
     };
     addActivity(activity);
+
     setFormData({
       type: 'walking',
       duration: 30,
-      caloriesBurned: 0,
+      caloriesBurned: 100,
       notes: '',
+      date: new Date().toISOString().slice(0, 16),
     });
+
+    if (onComplete) {
+      onComplete();
+    }
   };
 
   return (
@@ -64,6 +83,17 @@ export const ActivityForm = () => {
           type="number"
           value={formData.caloriesBurned}
           onChange={(e) => setFormData({ ...formData, caloriesBurned: Number(e.target.value) })}
+          className="form-input"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Date</label>
+        <input
+          type="datetime-local"
+          value={formData.date}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           className="form-input"
           required
         />

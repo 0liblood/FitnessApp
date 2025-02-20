@@ -12,40 +12,33 @@ import { useStore } from './store/useStore';
 function App() {
   const profile = useStore((state) => state.profile);
 
-  if (!profile) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <main className="container mx-auto px-4 py-8">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Welcome to FitTrack!</h2>
-            <p className="text-gray-600 mb-8">
-              Let's start by setting up your profile to personalize your fitness journey.
-            </p>
-            <ProfileForm />
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 pb-16 md:pb-0">
         <Header />
         <main className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<StatisticsDashboard />} />
-              <Route path="/progress" element={<ProgressDashboard />} />
-              <Route path="/workouts" element={<WorkoutDashboard />} />
-              <Route path="/activities" element={<ActivityDashboard />} />
-              <Route path="/profile" element={<ProfileForm />} />
-            </Routes>
+            {profile ? (
+              <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<StatisticsDashboard />} />
+                <Route path="/progress" element={<ProgressDashboard />} />
+                <Route path="/workouts" element={<WorkoutDashboard />} />
+                <Route path="/activities" element={<ActivityDashboard />} />
+                <Route path="/profile" element={<ProfileForm />} />
+              </Routes>
+            ) : (
+              <div className="max-w-2xl mx-auto">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Welcome to FitTrack!</h2>
+                <p className="text-gray-600 mb-8">
+                  Let's start by setting up your profile to personalize your fitness journey.
+                </p>
+                <ProfileForm />
+              </div>
+            )}
           </div>
         </main>
-        <MobileNav />
+        {profile && <MobileNav />}
       </div>
     </Router>
   );

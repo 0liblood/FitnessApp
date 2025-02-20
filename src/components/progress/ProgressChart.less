@@ -1,0 +1,32 @@
+.progress-chart {
+  height: 100%; 
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem; 
+
+  .chart-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .bar {
+      width: 100%;
+      background-color: #c7d2fe; 
+      transition: background-color 0.3s ease;
+      border-radius: 0.25rem 0.25rem 0 0;
+
+      &:hover {
+        background-color: #a5b4fc; 
+      }
+    }
+
+    .bar-label {
+      font-size: 0.75rem; 
+      color: #6b7280;
+      margin-top: 0.25rem;
+      transform: rotate(45deg);
+      transform-origin: left;
+    }
+  }
+}
